@@ -20,7 +20,7 @@ interface QuizDB {
   category: string;
   correct_answer: string;
   difficulty: string;
-  inconrrect_answer: Array<string>;
+  incorrect_answers: Array<string>;
   question: string;
   type: string;
 }
@@ -61,9 +61,7 @@ export const QuizProvider = ({ children }: PropChildren) => {
   }, [quizData]);
 
   return (
-    <quizContext.Provider
-      value={{ quizData, setCategory, setDifficulty, questions }}
-    >
+    <quizContext.Provider value={{ quizData, setCategory, setDifficulty, questions }}>
       {children}
     </quizContext.Provider>
   );

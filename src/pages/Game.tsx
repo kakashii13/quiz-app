@@ -1,19 +1,28 @@
-import { Badge, Button, List, ListItem, Text, VStack } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import {
+  Badge,
+  Button,
+  defaultStandaloneParam,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { useQuizContext } from "../context";
 
 interface Question {
-  correct_answer: string | boolean;
-  incorrect_answers: Array<string>;
   question: string;
-  type: string;
+}
+
+interface Answers {
+  text: string;
+  correct: string | boolean;
 }
 
 export const Game = () => {
   const { questions } = useQuizContext();
-  const [trivia, setTrivia] = useState<Question>({} as Question);
+  const [question, setQuestion] = useState("");
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [correctAnswer, setCorrectAnswer] = useState("");
+  const [answers, setAnswers] = useState<Answers[]>([]);
 
   const handleQuestion = (answer: string) => {
     setCorrectAnswer(answer);
@@ -27,24 +36,38 @@ export const Game = () => {
 
   useEffect(() => {
     if (questions.length !== 0) {
-      const { correct_answer, incorrect_answers, question, type } = questions[currentQuestion];
-      setTrivia({ ...trivia, correct_answer, incorrect_answers, question, type });
-      setCorrectAnswer(correct_answer);
+      const { correct_answer, incorrect_answers, question, type } =
+        questions[currentQuestion];
+      setQuestion(question);
+
+      const arrOfAnswers = incorrect_answers
+        .map((i) => {
+          const obj: Answers = {
+            text: i,
+            correct: false,
+          };
+          return obj;
+        })
+        .concat({ text: correct_answer, correct: true });
+
+      setAnswers(arrOfAnswers);
     }
-    console.log(currentQuestion);
   }, [questions, currentQuestion]);
   return (
     <VStack>
       <Badge>{`${currentQuestion + 1} / 10`}</Badge>
-      <Text>{trivia?.question?.replace("&#039;", "'")}</Text>
-      <Button bg="white" minW="sm" value={correctAnswer} onClick={handleQuestion}>
-        {trivia.correct_answer}
-      </Button>
-      {trivia?.incorrect_answers?.map((incorrect) => (
-        <Button bg="white" minW="sm" key={incorrect} value={incorrect} onClick={handleQuestion}>
-          {incorrect}
+      <Text>{question?.replace("&#039;", "'")}</Text>
+      {answers.map((ans) => (
+        <Button
+          key={ans.text}
+          bg="white"
+          minW="sm"
+          onClick={() => handleQuestion(correctAnswer)}
+        >
+          {ans.text}
         </Button>
       ))}
+
       <Button colorScheme="twitter" minW="sm" onClick={nextQuestion}>
         Next
       </Button>

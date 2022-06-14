@@ -1,4 +1,9 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface QuizData {
   category: number;
@@ -41,7 +46,6 @@ export const QuizProvider = ({ children }: PropChildren) => {
       );
       const response = await db.json();
       const results = response.results;
-      console.log(response.results);
       setQuestions(results);
     };
 
@@ -56,12 +60,10 @@ export const QuizProvider = ({ children }: PropChildren) => {
     setQuizData({ ...quizData, difficulty: difficulty });
   };
 
-  useEffect(() => {
-    console.log(quizData);
-  }, [quizData]);
-
   return (
-    <quizContext.Provider value={{ quizData, setCategory, setDifficulty, questions }}>
+    <quizContext.Provider
+      value={{ quizData, setCategory, setDifficulty, questions }}
+    >
       {children}
     </quizContext.Provider>
   );

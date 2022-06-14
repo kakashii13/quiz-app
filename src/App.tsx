@@ -6,6 +6,7 @@ import { Difficulty } from "./pages/Difficulty";
 import { Home } from "./pages/Home";
 import "@fontsource/raleway/400.css";
 import { Game } from "./pages/Game";
+import { Results } from "./pages/Results";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
             <Route path="/categories" element={<Categories />} />
             <Route path="/difficulty" element={<Difficulty />} />
             <Route path="/game" element={<Game />} />
+            <Route path="/results" element={<Results />} />
           </Routes>
         </Container>
       </QuizProvider>

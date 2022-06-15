@@ -1,8 +1,5 @@
 import { Button, Icon, Text } from "@chakra-ui/react";
-import {
-  AiFillCloseCircle,
-  AiOutlineCheckCircle,
-} from "react-icons/ai";
+import { AiFillCloseCircle, AiOutlineCheckCircle } from "react-icons/ai";
 
 interface Props {
   ans: {
@@ -14,20 +11,15 @@ interface Props {
   handleQuestion: (text: string) => void;
 }
 
-export const ButtonQuestion = ({
-  ans,
-  isSelected,
-  handleQuestion,
-}: Props) => {
+export const ButtonQuestion = ({ ans, isSelected, handleQuestion }: Props) => {
   return (
     <Button
       isDisabled={isSelected && !ans.selected}
-      colorScheme={
-        ans.selected ? (ans.correct ? "green" : "red") : "gray"
-      }
+      colorScheme={ans.selected ? (ans.correct ? "green" : "red") : "gray"}
       minW="xs"
       fontWeight="400"
       // border="1px solid #ccc"
+      boxShadow="base"
       onClick={() => handleQuestion(ans.text)}
     >
       <Text>{ans.text}</Text>

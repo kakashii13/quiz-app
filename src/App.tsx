@@ -6,8 +6,10 @@ import { Difficulty } from "./pages/Difficulty";
 import { Home } from "./pages/Home";
 // import "@fontsource/raleway/400.css";
 import "@fontsource/open-sans/400.css";
+import "@fontsource/open-sans/700.css";
 import { Game } from "./pages/Game";
 import { Results } from "./pages/Results";
+import { PrivateRoute } from "./components/PrivateRoute";
 
 const App = () => {
   return (
@@ -16,10 +18,38 @@ const App = () => {
         <Container>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/categories" element={<Categories />} />
-            <Route path="/difficulty" element={<Difficulty />} />
-            <Route path="/game" element={<Game />} />
-            <Route path="/results" element={<Results />} />
+            <Route
+              path="/categories"
+              element={
+                <PrivateRoute>
+                  <Categories />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/difficulty"
+              element={
+                <PrivateRoute>
+                  <Difficulty />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/game"
+              element={
+                <PrivateRoute>
+                  <Game />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/results"
+              element={
+                <PrivateRoute>
+                  <Results />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </Container>
       </QuizProvider>

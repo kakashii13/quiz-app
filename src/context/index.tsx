@@ -1,9 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   ContextProps,
   PropChildren,
@@ -19,6 +14,7 @@ export const QuizProvider = ({ children }: PropChildren) => {
   const [quizData, setQuizData] = useState<QuizData>({} as QuizData);
   const [questions, setQuestions] = useState<QuizDB[]>([]);
   const [totalPoints, setTotalPoints] = useState(0);
+  const [isStarted, setIsStarted] = useState(false);
 
   useEffect(() => {
     if (!quizData.category && !quizData.difficulty) return;
@@ -47,6 +43,10 @@ export const QuizProvider = ({ children }: PropChildren) => {
     setTotalPoints((totalPoints) => totalPoints + points);
   };
 
+  const resetScore = () => setTotalPoints(0);
+
+  const handleStarted = () => setIsStarted(true);
+
   return (
     <quizContext.Provider
       value={{
@@ -56,6 +56,9 @@ export const QuizProvider = ({ children }: PropChildren) => {
         questions,
         totalPoints,
         addPoints,
+        resetScore,
+        handleStarted,
+        isStarted,
       }}
     >
       {children}

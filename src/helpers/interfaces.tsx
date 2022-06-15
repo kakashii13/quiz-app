@@ -12,8 +12,11 @@ export interface ContextProps {
   setCategory: (id: number) => void;
   setDifficulty: (difficulty: string) => void;
   addPoints: (points: number) => void; // score
+  resetScore: () => void;
+  handleStarted: () => void;
   questions: QuizDB[];
   totalPoints: number;
+  isStarted: boolean;
 }
 
 export interface QuizDB {

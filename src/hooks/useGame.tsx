@@ -1,8 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useQuizContext } from "../context";
+
+interface Answers {
+  text: string;
+  correct: string | boolean;
+  selected: boolean;
+}
 
 export const useGame = () => {
   const { questions, addPoints } = useQuizContext();
+  const [question, setQuestion] = useState("");
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState<Answers[]>([]);
+  const [isSelected, setIsSelected] = useState(false);
+  const navigate = useNavigate();
 
   const handleQuestion = (answer: string) => {
     setIsSelected(true);
@@ -42,9 +54,28 @@ export const useGame = () => {
           text: correct_answer,
           correct: true,
           selected: false,
+        })
+        .sort((a, b) => {
+          const fa = a.text.toLowerCase();
+          const fb = b.text.toLowerCase();
+
+          if (fa < fb) return 1;
+
+          if (fa > fb) return -1;
+
+          return 0;
         });
 
       setAnswers(arrOfAnswers);
     }
   }, [questions, currentQuestion]);
+
+  return {
+    question,
+    currentQuestion,
+    answers,
+    isSelected,
+    handleQuestion,
+    nextQuestion,
+  };
 };

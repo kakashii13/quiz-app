@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useQuizContext } from "../context";
 
 export const Results = () => {
-  const { totalPoints } = useQuizContext();
+  const { totalPoints, resetScore } = useQuizContext();
   const navigate = useNavigate();
 
-  const handleClick = () => navigate("/categories");
+  const handleClick = () => {
+    resetScore();
+    navigate("/categories");
+  };
 
   return (
     <VStack>

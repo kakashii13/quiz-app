@@ -4,7 +4,8 @@ import { QuizProvider } from "./context";
 import { Categories } from "./pages/Categories";
 import { Difficulty } from "./pages/Difficulty";
 import { Home } from "./pages/Home";
-import "@fontsource/raleway/400.css";
+// import "@fontsource/raleway/400.css";
+import "@fontsource/open-sans/400.css";
 import { Game } from "./pages/Game";
 import { Results } from "./pages/Results";
 

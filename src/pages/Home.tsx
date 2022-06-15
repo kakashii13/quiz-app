@@ -1,5 +1,4 @@
 import { Button, Heading, Stack } from "@chakra-ui/react";
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
@@ -7,10 +6,22 @@ export const Home = () => {
 
   const handleClick = () => navigate("/categories");
   return (
-    <Stack>
-      <Heading size="4xl">Quiz Game</Heading>
-      <Button colorScheme="linkedin" onClick={handleClick}>
-        Lets play
+    <Stack spacing={10}>
+      <Heading
+        size="4xl"
+        bgGradient="linear(to-r , #37D5D6, 
+          #36096D)"
+        bgClip="text"
+      >
+        Quizzles
+      </Heading>
+      <Button
+        bg="black"
+        colorScheme="black"
+        onClick={handleClick}
+        minW="xs"
+      >
+        Play Now
       </Button>
     </Stack>
   );

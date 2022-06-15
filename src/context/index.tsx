@@ -1,31 +1,16 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import {
+  ContextProps,
+  PropChildren,
+  QuizData,
+  QuizDB,
+} from "../helpers/interfaces";
 
-interface QuizData {
-  category: number;
-  difficulty: string;
-}
-
-interface PropChildren {
-  children: JSX.Element | JSX.Element[];
-}
-
-interface ContextProps {
-  quizData: QuizData;
-  setCategory: (id: number) => void;
-  setDifficulty: (difficulty: string) => void;
-  addPoints: (points: number) => void;
-  questions: QuizDB[];
-  totalPoints: number;
-}
-
-interface QuizDB {
-  category: string;
-  correct_answer: string;
-  difficulty: string;
-  incorrect_answers: Array<string>;
-  question: string;
-  type: string;
-}
 const quizContext = createContext({} as ContextProps);
 
 export const useQuizContext = () => useContext(quizContext);
@@ -64,7 +49,14 @@ export const QuizProvider = ({ children }: PropChildren) => {
 
   return (
     <quizContext.Provider
-      value={{ quizData, setCategory, setDifficulty, questions, totalPoints, addPoints }}
+      value={{
+        quizData,
+        setCategory,
+        setDifficulty,
+        questions,
+        totalPoints,
+        addPoints,
+      }}
     >
       {children}
     </quizContext.Provider>

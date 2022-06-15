@@ -2,12 +2,13 @@ import { extendTheme } from "@chakra-ui/react";
 
 export const theme = extendTheme({
   fonts: {
-    body: `'Raleway', sans-serif`,
+    body: `'Open-sans', sans-serif`,
   },
   styles: {
     global: {
       "html, body, #root": {
-        bg: "gray.100",
+        bg: "gray.300",
+        // color: "white",
         height: "100vh",
         display: "flex",
         justifyContent: "center",

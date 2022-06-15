@@ -6,14 +6,19 @@ export const Results = () => {
   const { totalPoints } = useQuizContext();
   const navigate = useNavigate();
 
-  const handleClick = () => navigate("/");
+  const handleClick = () => navigate("/categories");
 
   return (
     <VStack>
-      <Heading>Congrats, you have:</Heading>
+      <Heading>Congrats, your score is:</Heading>
       <Text fontSize="xl">{`${totalPoints} points`}</Text>
-      <Button onClick={handleClick} colorScheme="twitter" minW="100px" my="10px">
-        Back
+      <Button
+        onClick={handleClick}
+        colorScheme="twitter"
+        minW="100px"
+        my="10px"
+      >
+        Play again
       </Button>
     </VStack>
   );
